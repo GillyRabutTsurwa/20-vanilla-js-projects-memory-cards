@@ -1,12 +1,7 @@
-## Memory Cards
+### Basic Card Styling
 
-Flash card app for learning. Display, add and remove memory cards with questions and answers
+- For this branch, we did the basic styling of the card. 
+- Flip effect is not yet there, neither is the effect of where the card comes from the side. These will be coming in the next branch.
+- Removing and adding the active class between cards is the most interactivity available in this branch
 
-## Project Specifications
 
-- Create flip cards using CSS
-- Create "Add new card" overlay with form
-- Display question cards and flip for answer
-- View prev and next cards
-- Add new cards to local storage
-- Clear all cards from local storage
