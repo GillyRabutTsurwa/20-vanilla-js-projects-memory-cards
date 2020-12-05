@@ -214,12 +214,11 @@ h1 {
         right: 0.5rem;
       }
     }
+    &.show-answer .inner__card {
+      -webkit-transform: rotateX(180deg);
+      transform: rotateX(180deg);
+    }
   }
-}
-
-.card.show-answer .inner__card {
-  -webkit-transform: rotateX(180deg);
-  transform: rotateX(180deg);
 }
 
 // ==========
