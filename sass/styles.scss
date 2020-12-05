@@ -122,6 +122,8 @@ h1 {
     height: 100%;
     font-size: 2.2rem;
     opacity: 0;
+
+    //NEW:
     -webkit-transform: translateX(50%) rotateY(-10deg);
     transform: translateX(50%) rotateY(-10deg);
     -webkit-transition: opacity 0.4s ease, -webkit-transform 0.4s ease;
@@ -130,20 +132,22 @@ h1 {
     transition: transform 0.4s ease, opacity 0.4s ease, -webkit-transform 0.4s ease;
 
     &.active {
+      cursor: pointer;
       opacity: 1;
+      // NEW;
       -webkit-transform: translateX(0) rotateY(0deg);
       transform: translateX(0) rotateY(0deg);
       z-index: 10;
-      cursor: pointer;
     }
 
+    //NEWNOTE: Cette classe sera ajoutée avec Javascript
     &.left {
       -webkit-transform: translateX(-50%) rotateY(10deg);
       transform: translateX(-50%) rotateY(10deg);
     }
 
     //TESTING:
-    // QUESTION: why didI comment this out? It seems to work fine with this code included.
+    // QUESTION: why did I comment this out? It seems to work fine with this code included.
     &.right {
       -webkit-transform: translateX(50%) rotateY(10deg);
       transform: translateX(50%) rotateY(10deg);
@@ -156,9 +160,12 @@ h1 {
       border-radius: 0.4rem;
       width: 100%;
       height: 100%;
+      //NEW: the transfrom-style property.
+      //QUESTION: Qu'est-ce que fait ce propriété ?
       // TODO: Research transform style preserve 3d
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
+      // NEW: transition for flip effect
       -webkit-transition: -webkit-transform 0.8s ease;
       transition: -webkit-transform 0.8s ease;
       transition: transform 0.8s ease;
@@ -167,6 +174,7 @@ h1 {
       &--front,
       &--back {
         position: absolute;
+        //NEW: Important property for card effect. With this, the back of the element does not show when it is flipped over. I use this on my flip card UIs all the time
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         top: 0;
@@ -185,8 +193,10 @@ h1 {
         background-color: #fff;
       }
 
+      //NEW: Adding a "Flip" clickable" element on the front and back faces of the card
       &--front::after,
       &--back::after {
+        // NEW: How to use font awesome in CSS
         content: "\f021  Flip";
         font-family: "Font Awesome 5 Free", "Lato", sans-serif;
         position: absolute;
@@ -197,12 +207,14 @@ h1 {
         color: #ddd;
       }
 
+      // NEW: The front face of the card will show on top
       &--front {
         -webkit-transform: rotateX(0deg);
         transform: rotateX(0deg);
         z-index: 2;
       }
 
+      //NEW: The back face will be on the back to begin with
       &--back {
         -webkit-transform: rotateX(180deg);
         transform: rotateX(180deg);
@@ -214,12 +226,13 @@ h1 {
         right: 0.5rem;
       }
     }
-  }
-}
 
-.card.show-answer .inner__card {
-  -webkit-transform: rotateX(180deg);
-  transform: rotateX(180deg);
+    //NEW this flips the card over when the show answer class is activated on the card
+    &.show-answer .inner__card {
+      -webkit-transform: rotateX(180deg);
+      transform: rotateX(180deg);
+    }
+  }
 }
 
 // ==========
