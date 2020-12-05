@@ -214,15 +214,14 @@ h1 {
         right: 0.5rem;
       }
     }
+    &.show-answer .inner__card {
+      -webkit-transform: rotateX(180deg);
+      transform: rotateX(180deg);
+    }
   }
 }
 
-.card.show-answer .inner__card {
-  -webkit-transform: rotateX(180deg);
-  transform: rotateX(180deg);
-}
-
-// ==========
+// NEW: Everything below this
 .navigation {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -271,6 +270,7 @@ h1 {
 
   transition: 0.3s ease;
 
+  //NOTE: This is responsible for showing the form (like an overlay). The z-index is to put it on top of the cards UI. By default, the z-index is -1 (behind everything)
   &.show {
     opacity: 1;
     z-index: 2;
