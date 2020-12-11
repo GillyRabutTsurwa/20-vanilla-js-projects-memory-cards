@@ -1,11 +1,3 @@
-/**
- * QUOI FAIRE:
- * Analyse code (il devrait avoir beaucoup de commentaires)
- * Refactor Code
- * Add delete single card functionality
- *
- */
-
 const DOM = (function () {
   const elements = {
     cardsContainer: document.getElementById("cards-container"),
@@ -19,45 +11,35 @@ const DOM = (function () {
     addCardBtn: document.getElementById("add-card"),
     clearBtn: document.getElementById("clear"),
     addContainer: document.getElementById("add-container"),
+    //NEW:
+    innerCard: document.querySelector(".inner__card"),
   };
   return elements;
 })();
 
-// Traquer la carte actuelle
 let currentActiveCard = 0;
 
-// Garder les DOM cards
 const cardsEl = [];
 
-// Garder les données des cartes
-// const cardsData = [
-// 	{
-// 		question: "What must a variable begin with?",
-// 		answer: "A letter, $ or _"
-// 	},
-// 	{
-// 		question: "What is a variable?",
-// 		answer: "A container for a piece of data"
-// 	},
-// 	{
-// 		question: "Example of a case sensitive variable?",
-// 		answer: "thisIsAVariable"
-// 	}
-// ];
-const cardsData = getCardsData();
+const cardsData = [
+  {
+    question: "What must a variable begin with?",
+    answer: "A letter, $ or _",
+  },
+  {
+    question: "What is a variable?",
+    answer: "A container for a piece of data",
+  },
+  {
+    question: "Example of a case sensitive variable?",
+    answer: "thisIsAVariable",
+  },
+];
 
-/**
- * This function is used to show the number of card out of total number of cards.
- */
 function updateCurrentText() {
   DOM.currentEl.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
 }
 
-/**
- * This function creates a single card
- * @param {*} dataObj
- * @param {*} index
- */
 function createSingleCard(dataObj, index) {
   // recreating the card first by creating a div
   const card = document.createElement("div");
@@ -89,10 +71,7 @@ function createSingleCard(dataObj, index) {
 
   // add a clickListener to the card
   card.addEventListener("click", () => {
-    // toggle the show-answer class
-    debugger;
     card.classList.toggle("show-answer");
-    //TODO: put delete single card funcitonality here
   });
 
   // after creating this card, we add it to our cardsElement array
@@ -121,7 +100,7 @@ DOM.nextBtn.addEventListener("click", () => {
   }
 
   cardsEl[currentActiveCard].className = "card active";
-  console.log(currentActiveCard);
+  // console.log(currentActiveCard);
 
   updateCurrentText();
 });
@@ -166,32 +145,21 @@ DOM.addCardBtn.addEventListener("click", () => {
 
     DOM.addContainer.classList.remove("show");
     cardsData.push(newCard);
-    setCardsData(cardsData);
+    console.log(cardsData);
   }
 });
 
-// get cards from local storage
-function getCardsData() {
-  const cards = JSON.parse(localStorage.getItem("cards"));
-  return cards === null ? [] : cards;
-}
+//TESTING:
+//FAIL:
+console.log(cardsEl);
+cardsEl.forEach((currentCard, index) => {
+  let idx = index;
+  currentCard.addEventListener("click", (e) => {
+    if (e.target.id === "delete-card") {
+      currentCard.classList.remove("show-answer");
+      console.log(`Clicked the trash bin of card # ${idx}`);
 
-// add card to local storage
-function setCardsData(cards) {
-  localStorage.setItem("cards", JSON.stringify(cards));
-  // how to reload the page. nice
-  window.location.reload();
-}
-
-// clear cards button
-DOM.clearBtn.addEventListener("click", () => {
-  localStorage.clear();
-  DOM.cardsContainer.innerHTMl = "";
-  window.location.reload();
-});
-
-const deleteCard = document.getElementById("delete-card");
-deleteCard.addEventListener("click", () => {
-  // alert("CLICKED AND WORKED");
-  DOM.addContainer.classList.remove("show-answer");
+      // filter code a suivre
+    }
+  });
 });
